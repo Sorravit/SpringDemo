@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="triangle" class="big.Triangle">
+		<property name="myType" value="nice" />
+		<property name="pointA" ref="point1" />
+		<property name="pointB">
+			<bean class="big.Point">
+				<property name="X" value="-20" />
+				<property name="Y" value="30" />
+			</bean>
+		</property>
+		<property name="pointC">
+			<bean id="point3WhichDontReallyNeedtheIDSinceNoONeRefIt" class="big.Point">
+				<property name="X" value="-10" />
+				<property name="Y" value="20" />
+			</bean>
+		</property>
+
+	</bean>
+	<bean id="circle" class="big.Circle">
+		<constructor-arg type="int" value="2" />
+		<constructor-arg index="1" value="bad" />
+	</bean>
+	<bean id="rectangle" class="big.Rectangle">
+		<property name="points">
+			<list>
+				<ref bean="point1" />
+				<ref bean="point4" />
+				<ref bean="point1" />
+				<ref bean="point4" />
+			</list>
+		</property>
+	</bean>
+	<bean id="point1" class="big.Point">
+		<property name="X" value="0" />
+		<property name="Y" value="0" />
+	</bean>
+	<bean id="point4" class="big.Point">
+		<property name="X" value="40" />
+		<property name="Y" value="40" />
+	</bean>
+
+</beans>
