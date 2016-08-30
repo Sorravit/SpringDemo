@@ -18,7 +18,14 @@ public class DrawingApp {
         circle.draw();
         Rectangle rectangle =(Rectangle)factory.getBean("rectangle");
         rectangle.draw();
-
+        Line line = (Line)factory.getBean("line");
+        line.draw();
+        line.setPoint4(new Point(-123,123));
+//using scope="prototype" in xml to make Iterable aIterable diffrence object
+        Line line2 = (Line)factory.getBean("line");
+        line2.draw();
+        triangle =(Triangle)factory.getBean("triangle2");
+        triangle.draw();
     }
 
 }
