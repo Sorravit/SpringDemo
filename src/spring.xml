@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 <beans>
+	<bean id="line" class="big.Line" autowire="byName">
+	</bean>
+	<bean id="parentTriangle" class="big.Triangle">
+		<property name="pointA" ref="point1" />
+	</bean>
+	<bean id="triangle2" class="big.Triangle" parent="parentTriangle">
+		<property name="pointB">
+			<bean class="big.Point">
+				<property name="X" value="20" />
+				<property name="Y" value="10" />
+			</bean>
+		</property>
+
+		<property name="pointC" ref="point4" />
+	</bean>
 	<bean id="triangle" class="big.Triangle">
 		<property name="myType" value="nice" />
 		<property name="pointA" ref="point1" />
@@ -22,9 +37,19 @@
 		<constructor-arg type="int" value="2" />
 		<constructor-arg index="1" value="bad" />
 	</bean>
-	<bean id="rectangle" class="big.Rectangle">
+	<bean id="parentRectangle" class="big.Rectangle" abstract="true">
 		<property name="points">
 			<list>
+				<ref bean="point1" />
+				<ref bean="point4" />
+				<ref bean="point1" />
+				<ref bean="point4" />
+			</list>
+		</property>
+	</bean>
+	<bean id="rectangle" class="big.Rectangle" parent="parentRectangle">
+		<property name="points">
+			<list merge="true">
 				<ref bean="point1" />
 				<ref bean="point4" />
 				<ref bean="point1" />
